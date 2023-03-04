@@ -6,13 +6,8 @@ struct Country {
 }
 
 impl Country {
-    fn insert_bulk(client: &mut Client, names: &[&str]) -> Result<(), Error> {
-        // let mut countries = Vec::new();
-        let statement =
-            client.prepare("INSERT INTO country (name) VALUES ($1)")?;
-        for name in names {
-            client.execute(&statement, &[name])?;
-        }
+    fn insert(client: &mut Client, name: &str) -> Result<(), Error> {
+        client.execute("INSERT INTO country (name) VALUES ($1)", &[&name])?;
         Ok(())
     }
 }
