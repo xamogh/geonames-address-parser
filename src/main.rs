@@ -1,9 +1,9 @@
-use postgres::{Client, Error, NoTls};
+use postgres::Error;
 mod database;
-use database::connection::{get_db_schema, get_pg_connection_string};
+use database::connection::{create_connection_client, get_db_schema};
 
 fn main() -> Result<(), Error> {
-    let mut client = Client::connect(&get_pg_connection_string(), NoTls)?;
+    let mut client = create_connection_client()?;
     let schema = get_db_schema();
 
     client.batch_execute(&format!(

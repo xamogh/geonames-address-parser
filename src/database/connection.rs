@@ -21,6 +21,5 @@ pub fn get_db_schema() -> std::string::String {
 }
 
 pub fn create_connection_client() -> Result<Client, Error> {
-    let mut client = Client::connect(&get_pg_connection_string(), NoTls);
-    client
+    Client::connect(&get_pg_connection_string(), NoTls)
 }
